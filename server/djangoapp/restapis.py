@@ -1,5 +1,5 @@
-import requests
 import os
+import requests
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -17,9 +17,10 @@ def get_request(endpoint, **kwargs):
             params=params+key+"="+value+"&"
     request_url = backend_url+endpoint+"?"+params
     print("GET from {} ".format(request_url))
+    response = requests.get(request_url)
+    return response.json()
     try:
-        response = requests.get(request_url)
-        return response.json()
+        pass
     except:
         print("Network exception occurred")
 

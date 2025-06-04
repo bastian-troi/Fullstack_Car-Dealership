@@ -37,14 +37,13 @@ const Dealer = () => {
   }
 
   const get_reviews = async ()=>{
-    const res = await fetch(reviews_url, {
-      method: "GET"
-    });
-    const retobj = await res.json();
-    
+    const response = await fetch(reviews_url);
+    const retobj = await response.json();
+    console.log(retobj)
     if(retobj.status === 200) {
-      if(retobj.reviews.length > 0){
-        setReviews(retobj.reviews)
+      const reviewsData = retobj.dealer || [];
+      if(reviewsData.length > 0){
+        setReviews(reviewsData)
       } else {
         setUnreviewed(true);
       }
